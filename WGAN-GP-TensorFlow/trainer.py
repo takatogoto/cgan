@@ -97,7 +97,7 @@ class Trainer(object):
         session_config = tf.ConfigProto(
             allow_soft_placement=True,
             gpu_options=tf.GPUOptions(allow_growth=True),
-            #device_count={'GPU': 0},
+            device_count={'GPU': 1},
         )
         self.session = self.supervisor.prepare_or_wait_for_session(config=session_config)
 
@@ -118,24 +118,23 @@ class Trainer(object):
     def train(self):
         log.infov("Training Starts!")
         pprint(self.batch_train)
-        with tf.device('/gpu:0'):
-            step = self.session.run(self.global_step)
+        step = self.session.run(self.global_step)
 
-            for s in xrange(self.config.max_training_steps):
+        for s in xrange(self.config.max_training_steps):
 
-                if s % self.config.ckpt_save_step == 0:
-                    log.infov("Saved checkpoint at %d", s)
-                    self.saver.save(self.session, os.path.join(
-                        self.train_dir, 'model'), global_step=s)
+            if s % self.config.ckpt_save_step == 0:
+                log.infov("Saved checkpoint at %d", s)
+                self.saver.save(self.session, os.path.join(
+                    self.train_dir, 'model'), global_step=s)
 
-                step, summary, d_loss, g_loss, step_time = \
-                    self.run_single_step(self.batch_train, step=s, is_train=True)
+            step, summary, d_loss, g_loss, step_time = \
+                self.run_single_step(self.batch_train, step=s, is_train=True)
 
-                if s % self.config.log_step == 0:
-                    self.log_step_message(step, d_loss, g_loss, step_time)
+            if s % self.config.log_step == 0:
+                self.log_step_message(step, d_loss, g_loss, step_time)
 
-                if s % self.config.write_summary_step == 0:
-                    self.summary_writer.add_summary(summary, global_step=step)
+            if s % self.config.write_summary_step == 0:
+                self.summary_writer.add_summary(summary, global_step=step)
 
     def run_single_step(self, batch, step=None, is_train=True):
         _start_time = time.time()
