@@ -1,2 +1,2 @@
-model_checkpoint_path: "dcgan_gpu.ckpt"
-all_model_checkpoint_paths: "dcgan_gpu.ckpt"
+model_checkpoint_path: "dcgan_alubmu.ckpt"
+all_model_checkpoint_paths: "dcgan_alubmu.ckpt"
