@@ -2,6 +2,7 @@ album/data
 audio/mp3
 audio/wav
 audio/spec256
+audio/spec
 input/img
 input/spec
 model/
