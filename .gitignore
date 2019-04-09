@@ -3,6 +3,7 @@ audio/mp3
 audio/wav
 audio/spec256
 audio/spec
-input/img
-input/spec
+inputpre/img
+inputpre/spec
 model/
+*.ipynb_checkpoints
