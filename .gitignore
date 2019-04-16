@@ -8,4 +8,5 @@ input/img
 inputpre/spec
 model/
 *.ipynb_checkpoints
-*npy
+*.npy
+*.npz
