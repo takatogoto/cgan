@@ -1,2 +1,2 @@
-model_checkpoint_path: "dcgan_alubm_gpu_rest_d.ckpt"
-all_model_checkpoint_paths: "dcgan_alubm_gpu_rest_d.ckpt"
+model_checkpoint_path: "dcgan_alubm_gpu-vae.ckpt"
+all_model_checkpoint_paths: "dcgan_alubm_gpu-vae.ckpt"
